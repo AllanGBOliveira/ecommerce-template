@@ -1,31 +1,15 @@
 @font-face {
-  font-family: "Poppins";
-  src: url("~assets/fonts/Poppins-Regular.woff2") format("woff2"), url("~assets/fonts/Poppins-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Poppins";
-  src: url("~assets/fonts/Poppins-Medium.woff2") format("woff2"), url("~assets/fonts/Poppins-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Poppins";
-  src: url("~assets/fonts/Poppins-Light.woff2") format("woff2"), url("~assets/fonts/Poppins-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Poppins";
-  src: url("~assets/fonts/Poppins-Bold.woff2") format("woff2"), url("~assets/fonts/Poppins-Bold.woff") format("woff");
+  font-family: "Noto Sans";
+  src: url("~assets/fonts/NotoSans-Bold.woff2") format("woff2"), url("~assets/fonts/NotoSans-Bold.woff") format("woff");
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("~assets/fonts/NotoSans.woff2") format("woff2"), url("~assets/fonts/NotoSans.woff") format("woff");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -199,7 +183,7 @@ img {
 }
 
 body {
-  font-family: "Poppins";
+  font-family: "Noto Sans";
   background-color: rgba(44, 82, 152, 0.05);
 }
 
@@ -207,6 +191,10 @@ body {
   .container {
     max-width: 1340px;
   }
+}
+
+strong {
+  font-weight: bold;
 }
 
 .overlay {
@@ -230,13 +218,11 @@ body {
 
 header {
   background-color: white;
+  position: relative;
 }
 
 header .navbar {
   padding: 15px 0;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
 }
 
 header .navbar-brand {
@@ -246,9 +232,18 @@ header .navbar-brand {
   padding: 0;
   font-size: initial;
   line-height: initial;
+  display: block;
 }
 
 header .navbar-brand picture {
+  display: block;
+}
+
+header .navbar-brand source {
+  display: block;
+}
+
+header .navbar-brand img {
   display: block;
 }
 
@@ -328,11 +323,16 @@ header .user-buttons {
 
 header .user-buttons a,
 header .user-buttons .nuxt-link {
-  height: 39px;
   color: #2C5298;
-  font-size: 39px;
   display: inline-block;
   margin-right: 15px;
+}
+
+header .user-buttons a svg,
+header .user-buttons .nuxt-link svg {
+  font-size: 39px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 header .user-buttons a:last-child,
@@ -340,10 +340,17 @@ header .user-buttons .nuxt-link:last-child {
   margin-right: 0;
 }
 
-header .user-buttons a:hover, header .user-buttons a-active,
-header .user-buttons .nuxt-link:hover,
-header .user-buttons .nuxt-link-active {
-  color: rgba(255, 255, 255, 0.7);
+header .user-buttons a:hover svg, header .user-buttons a-active svg,
+header .user-buttons .nuxt-link:hover svg,
+header .user-buttons .nuxt-link-active svg {
+  opacity: .7;
+}
+
+header .user-buttons a.user .text,
+header .user-buttons .nuxt-link.user .text {
+  display: inline-block;
+  line-height: 1.125;
+  margin-left: 10px;
 }
 
 header .toggle-side-bar {
@@ -400,7 +407,7 @@ header .toggle-side-bar {
 }
 
 .categories {
-  background-color: #41B883;
+  background-color: white;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
@@ -412,18 +419,12 @@ header .toggle-side-bar {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.categories ul li {
-  margin-right: 10px;
-}
-
-.categories ul li:last-child {
-  margin-right: 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .categories ul li.categories-title {
-  color: white;
+  color: #2C5298;
   font-size: 20px;
   font-weight: 300;
   text-transform: uppercase;
@@ -441,31 +442,40 @@ header .toggle-side-bar {
 .categories ul li a,
 .categories ul li button,
 .categories ul li .nuxt-link {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 300;
+  color: #2C5298;
+  font-weight: bold;
   display: inline-block;
-  padding: 8px 10px;
+  padding: 10px 15px;
+  font-size: 17px;
+  border-radius: 5px 5px 0 0;
+}
+
+.categories ul li a svg,
+.categories ul li button svg,
+.categories ul li .nuxt-link svg {
+  font-size: 18px;
+  margin-right: 8px;
 }
 
 .categories ul li a:hover,
 .categories ul li button:hover,
 .categories ul li .nuxt-link:hover {
-  background-color: #349268;
+  background-color: #213d70;
+  color: white;
 }
 
 .categories ul li a-active,
 .categories ul li button-active,
 .categories ul li .nuxt-link-active {
-  background-color: white;
-  color: #41B883;
+  background-color: #2C5298;
+  color: white;
 }
 
 .categories ul li a-active:hover,
 .categories ul li button-active:hover,
 .categories ul li .nuxt-link-active:hover {
-  background-color: white;
-  color: #41B883;
+  background-color: #2C5298;
+  color: white;
 }
 
 @media (max-width: 575.98px) {

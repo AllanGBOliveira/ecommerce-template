@@ -29,18 +29,25 @@
 
 header {
     background-color: white;
+    position: relative;
     .navbar {
         padding: 15px 0;
-        align-items: flex-start;
     }
-    .navbar-brand{
+    .navbar-brand {
         width: 112px;
         min-width: 112px;
         margin-right: 24px;
         padding: 0;
         font-size: initial;
         line-height: initial;
-        picture{
+        display: block;
+        picture {
+            display: block;
+        }
+        source {
+            display: block;
+        }
+        img {
             display: block;
         }
     }
@@ -69,7 +76,7 @@ header {
             color: rgba($color-1, 0.7);
             font-size: 18px;
             position: relative;
-            &::before{
+            &::before {
                 content: "";
                 position: absolute;
                 left: 0;
@@ -87,17 +94,28 @@ header {
         min-width: max-content;
         a,
         .nuxt-link {
-            height: 39px;
             color: $color-1;
-            font-size: 39px;
             display: inline-block;
             margin-right: 15px;
+            svg {
+                font-size: 39px;
+                transition: all 0.2s ease-in-out;
+            }
             &:last-child {
                 margin-right: 0;
             }
             &:hover,
             &-active {
-                color: rgba($color: white, $alpha: 0.7);
+                svg{
+                    opacity: .7;
+                }
+            }
+            &.user {
+                .text {
+                    display: inline-block;
+                    line-height: 1.125;
+                    margin-left: 10px;
+                }
             }
         }
     }
@@ -155,18 +173,16 @@ header {
 
 //-------------------------------------------------------------------CATEGORIES-------------------------------------------------------------//
 .categories {
-    background-color: $color-2;
+    background-color:white;
     box-shadow: 0 3px 6px rgba(black, 0.16);
     ul {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         li {
-            margin-right: 10px;
-            &:last-child {
-                margin-right: 0;
-            }
+
             &.categories-title {
-                color: white;
+                color: $color-1;
                 font-size: 20px;
                 font-weight: 300;
                 text-transform: uppercase;
@@ -182,21 +198,27 @@ header {
             a,
             button,
             .nuxt-link {
-                color: white;
-                text-transform: uppercase;
-                font-weight: 300;
+                color: $color-1;
+                font-weight: bold;
                 display: inline-block;
-                padding: 8px 10px;
+                padding: 10px 15px;
+                font-size: 17px;
+                border-radius: 5px 5px 0 0;
+                svg{
+                    font-size: 18px;
+                    margin-right: 8px ;
+                }
                 &:hover {
-                    background-color: darken($color: $color-2, $amount: 10%);
+                    background-color: darken($color: $color-1, $amount: 10%);
+                    color: white;
                 }
                 &-active {
-                    background-color: white;
-                    color: $color-2;
+                    background-color: $color-1;
+                    color: white;
 
                     &:hover {
-                        background-color: white;
-                        color: $color-2;
+                        background-color: $color-1;
+                        color: white;
                     }
                 }
             }
@@ -359,10 +381,8 @@ header {
     border-radius: 5px;
     box-shadow: 0 3px 6px rgba(black, 0.16);
     background-color: white;
-    
- 
-    
-    .filter-title{
+
+    .filter-title {
         font-size: 16px;
         background-color: transparent;
         display: block;
@@ -373,26 +393,26 @@ header {
         border: 0;
         padding: 0 12px 3px 12px;
 
-        &:focus{
+        &:focus {
             outline: none;
         }
     }
-    .filters-container{
-        &:first-child{
-            .filter-title{
+    .filters-container {
+        &:first-child {
+            .filter-title {
                 padding-top: 12px;
             }
         }
-        &:last-child{
-            .filter-title{
+        &:last-child {
+            .filter-title {
                 padding-bottom: 12px;
             }
         }
     }
-  
-    li{
+
+    li {
         padding: 0 12px 12px 12px;
-        &:last-child{
+        &:last-child {
             margin-bottom: 0;
         }
     }
@@ -406,7 +426,7 @@ header {
         -ms-user-select: none;
         user-select: none;
         font-size: 13px;
-        &:last-child{
+        &:last-child {
             margin-bottom: 0;
         }
 
@@ -457,15 +477,14 @@ header {
         }
     }
 
-    .custom-ranger{
+    .custom-ranger {
         position: relative;
-        input{
+        input {
             // position: absolute;
-            &.max{
+            &.max {
                 transform: scaleX(-1);
             }
         }
-
     }
 }
 

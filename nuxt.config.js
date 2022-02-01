@@ -56,6 +56,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    ['nuxt-fontawesome', {
+      component: 'fa',
+    }],
     ['nuxt-lazy-load', {
       // These are the default values
       images: true,
@@ -79,6 +82,35 @@ export default {
     }],
 
   ],
+
+  fontawesome: {
+    imports: [
+      // {
+      //   set: '@fortawesome/free-solid-svg-icons',
+      //   icons: ['faLightbulb']
+      // },
+      // {
+      //   set: '@fortawesome/free-brands-svg-icons',
+      //   icons: ['faGithub']
+      // },
+      // {
+      //   set: '@fortawesome/free-regular-svg-icons',
+      //   icons: ['faLightbulb']
+      // },
+      // {
+      //   set: '@fortawesome/free-solid-svg-icons',
+      //   icons: ['faHeart']
+      // },
+      // {
+      //   set: '@fortawesome/free-solid-svg-icons',
+      //   icons: ['faShoppingCart']
+      // },
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+    ]
+  },
 
   bootstrapVue: {
     icons: true

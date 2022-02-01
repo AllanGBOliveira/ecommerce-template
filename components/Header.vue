@@ -8,10 +8,7 @@
                             media="(max-width: 767px)"
                             srcset="/logo-2x.png"
                         />
-                        <img
-                            src="/logo.png"
-                            class="img-cover"
-                        /> </picture
+                        <img src="/logo.png" class="img-cover" /> </picture
                 ></nuxt-link>
 
                 <div class="search-box">
@@ -22,19 +19,24 @@
                         placeholder="Digite aqui o que você procura"
                     />
                     <button type="submit">
-                        <b-icon-search></b-icon-search>
+                         <fa icon="search" />
                     </button>
                 </div>
 
                 <div class="user-buttons">
-                    <nuxt-link to="/login"
-                        ><b-icon-person-circle></b-icon-person-circle>
+                    <nuxt-link class="user" to="/login">
+                        <fa icon="user-circle" />
+                        <div class="text">
+                            Bem-vindo
+                            <br />
+                            <strong>Gustavo</strong>
+                        </div>
                     </nuxt-link>
-                    <nuxt-link to="/favorites"
-                        ><b-icon-suit-heart-fill></b-icon-suit-heart-fill>
+                    <nuxt-link to="/favorites">
+                        <fa icon="heart" />
                     </nuxt-link>
-                    <nuxt-link to="/cart"
-                        ><b-icon-cart-fill></b-icon-cart-fill>
+                    <nuxt-link to="/cart">
+                        <fa icon="shopping-cart" />
                     </nuxt-link>
                     <button
                         v-on:click="$toggleSideBar()"

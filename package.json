@@ -21,9 +21,13 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@nuxtjs/style-resources": "^1.2.1",
     "fibers": "^5.0.1",
     "node-sass": "^6.0.1",
+    "nuxt-fontawesome": "^0.4.0",
     "sass-loader": "^10.2.1"
   }
 }
