@@ -1,11 +1,13 @@
 <template>
-    <div v-on:click="$toggleSideBar()" class="overlay">
+    <div  class="overlay">
         
     </div>
 </template>
 
 <script>
 export default {
-    name: "Overlay"
+    name: "Overlay",
+
+
 }
 </script>

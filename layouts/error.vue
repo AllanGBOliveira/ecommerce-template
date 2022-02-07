@@ -1,5 +1,5 @@
 <template>
-    <div class="error-page">
+    <main class="error-page">
         <div class="container">
             <b-icon-exclamation-diamond></b-icon-exclamation-diamond>
             <p class="error-type">{{ error.statusCode }}</p>
@@ -7,7 +7,7 @@
 
             <nuxt-link to="/">Início <b-icon-arrow-return-left></b-icon-arrow-return-left></nuxt-link>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>

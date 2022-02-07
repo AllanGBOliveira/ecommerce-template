@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header id="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg justify-content-between">
                 <nuxt-link class="navbar-brand" to="/">
@@ -19,7 +19,7 @@
                         placeholder="Digite aqui o que você procura"
                     />
                     <button type="submit">
-                         <fa icon="search" />
+                        <fa icon="search" />
                     </button>
                 </div>
 

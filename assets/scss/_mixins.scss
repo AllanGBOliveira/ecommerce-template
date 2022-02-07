@@ -25,3 +25,26 @@
         opacity: 1;
     }
 }
+
+
+//-- Prefix --------------------------------------------------------------- //
+
+@mixin prefix($property, $value, $prefixes: ()) {
+    @each $prefix in $prefixes {
+        #{'-' + $prefix + '-' + $property}: $value;
+    }
+    #{$property}: $value;
+}
+
+
+//-- Selector ------------------------------------------------------------- //
+
+
+@mixin selectionColor($val){
+    ::selection {
+        background: $val;
+    }
+    ::-moz-selection {
+        background: $val;
+    }
+}

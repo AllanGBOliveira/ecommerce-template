@@ -1,11 +1,12 @@
 <template>
-    <div>
-   <span class="text-cetner">Home</span>
-    </div>
+    <main id="home">
+        <p class="text-center">Home</p>
+    </main>
 </template>
 
 <script>
 export default {
     name: "IndexPage",
+
 };
 </script>

@@ -14,6 +14,24 @@
   font-display: swap;
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 html,
 body,
 div,
@@ -184,7 +202,19 @@ img {
 
 body {
   font-family: "Noto Sans";
-  background-color: rgba(44, 82, 152, 0.05);
+  background-color: white;
+}
+
+body ::-moz-selection {
+  background: rgba(44, 82, 152, 0.2);
+}
+
+body ::selection {
+  background: rgba(44, 82, 152, 0.2);
+}
+
+body ::-moz-selection {
+  background: rgba(44, 82, 152, 0.2);
 }
 
 @media (min-width: 1400px) {
@@ -195,6 +225,25 @@ body {
 
 strong {
   font-weight: bold;
+}
+
+main {
+  height: 100%;
+}
+
+#wrapper {
+  overflow: hidden;
+}
+
+.page-enter-active,
+.page-leave-active {
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }
 
 .overlay {
@@ -209,16 +258,17 @@ strong {
   display: none;
 }
 
-@media (max-width: 575.98px) {
-  .overlay.active {
-    display: block;
-    pointer-events: stroke;
-  }
+.overlay.active {
+  display: block;
+  pointer-events: stroke;
+  -webkit-animation: fade-in 0.5s;
+  animation: fade-in 0.5s;
 }
 
 header {
   background-color: white;
   position: relative;
+  z-index: 999999;
 }
 
 header .navbar {
@@ -340,10 +390,10 @@ header .user-buttons .nuxt-link:last-child {
   margin-right: 0;
 }
 
-header .user-buttons a:hover svg, header .user-buttons a-active svg,
+header .user-buttons a:hover svg, header .user-buttons a-exact-active svg,
 header .user-buttons .nuxt-link:hover svg,
-header .user-buttons .nuxt-link-active svg {
-  opacity: .7;
+header .user-buttons .nuxt-link-exact-active svg {
+  opacity: 0.7;
 }
 
 header .user-buttons a.user .text,
@@ -410,9 +460,11 @@ header .toggle-side-bar {
   background-color: white;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  position: relative;
+  z-index: 9999;
 }
 
-.categories ul {
+.categories .categories-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -421,9 +473,10 @@ header .toggle-side-bar {
           justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  position: relative;
 }
 
-.categories ul li.categories-title {
+.categories .categories-list li.categories-title {
   color: #2C5298;
   font-size: 20px;
   font-weight: 300;
@@ -433,49 +486,200 @@ header .toggle-side-bar {
   background-color: #369a6e;
 }
 
-.categories ul li.categories-title button {
+.categories .categories-list li.categories-title button {
   background-color: transparent;
   border: 0;
   padding: 0;
 }
 
-.categories ul li a,
-.categories ul li button,
-.categories ul li .nuxt-link {
+.categories .categories-list li a,
+.categories .categories-list li button,
+.categories .categories-list li .nuxt-link {
+  border: 0;
   color: #2C5298;
   font-weight: bold;
   display: inline-block;
   padding: 10px 15px;
   font-size: 17px;
+  background-color: transparent;
   border-radius: 5px 5px 0 0;
+  line-height: initial;
 }
 
-.categories ul li a svg,
-.categories ul li button svg,
-.categories ul li .nuxt-link svg {
+.categories .categories-list li a svg,
+.categories .categories-list li button svg,
+.categories .categories-list li .nuxt-link svg {
   font-size: 18px;
   margin-right: 8px;
 }
 
-.categories ul li a:hover,
-.categories ul li button:hover,
-.categories ul li .nuxt-link:hover {
+.categories .categories-list li a:hover,
+.categories .categories-list li button:hover,
+.categories .categories-list li .nuxt-link:hover {
   background-color: #213d70;
   color: white;
 }
 
-.categories ul li a-active,
-.categories ul li button-active,
-.categories ul li .nuxt-link-active {
+.categories .categories-list li a:active, .categories .categories-list li a-exact-active,
+.categories .categories-list li button:active,
+.categories .categories-list li button-exact-active,
+.categories .categories-list li .nuxt-link:active,
+.categories .categories-list li .nuxt-link-exact-active {
   background-color: #2C5298;
   color: white;
 }
 
-.categories ul li a-active:hover,
-.categories ul li button-active:hover,
-.categories ul li .nuxt-link-active:hover {
+.categories .categories-list li a:active:hover, .categories .categories-list li a-exact-active:hover,
+.categories .categories-list li button:active:hover,
+.categories .categories-list li button-exact-active:hover,
+.categories .categories-list li .nuxt-link:active:hover,
+.categories .categories-list li .nuxt-link-exact-active:hover {
   background-color: #2C5298;
   color: white;
+}
+
+.categories .categories-menu {
+  padding: 22px 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  background-color: white;
+  z-index: 9999;
+  display: none;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.categories .categories-menu.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-animation: fade-in 0.5s;
+  animation: fade-in 0.5s;
+}
+
+.categories .menu-content {
+  width: 290px;
+  display: block;
+  margin: 0;
+  padding: 0 22px;
+  position: relative;
+}
+
+.categories .menu-content .categorie-item a,
+.categories .menu-content .categorie-item button {
+  font-size: initial;
+  font-weight: normal;
+  line-height: initial;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  color: #2c2c2c;
+  display: block;
+  padding: 8px 10px 8px 33px;
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+.categories .menu-content .categorie-item a.active,
+.categories .menu-content .categorie-item button.active {
+  background-color: #2C5298;
+  color: white;
+}
+
+.categories .menu-content .categorie-item a::before,
+.categories .menu-content .categorie-item button::before {
+  content: "\f054";
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.categories .tab-content {
+  position: relative;
+  z-index: 3;
+}
+
+.categories .tab-content > .active {
+  display: block;
+}
+
+.categories .tab-content .tab-pane {
+  height: 100%;
+}
+
+.categories .tab-content ul {
+  height: 100%;
+  -webkit-column-count: 6;
+          column-count: 6;
+  -webkit-column-gap: 70px;
+          column-gap: 70px;
+  -webkit-column-fill: auto;
+          column-fill: auto;
+  -webkit-column-rule: 1px solid #2c2c2c;
+          column-rule: 1px solid #2c2c2c;
+}
+
+.categories .tab-content ul li {
+  margin-bottom: 13px;
+}
+
+.categories .tab-content ul li:last-child {
+  margin-bottom: 0;
+}
+
+.categories .tab-content ul li a,
+.categories .tab-content ul li button,
+.categories .tab-content ul li .nuxt-link {
+  font-size: initial;
+  font-weight: normal;
+  line-height: initial;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.categories .tab-content ul li a:hover, .categories .tab-content ul li a.active, .categories .tab-content ul li a:active, .categories .tab-content ul li a:focus, .categories .tab-content ul li a-exact-active,
+.categories .tab-content ul li button:hover,
+.categories .tab-content ul li button.active,
+.categories .tab-content ul li button:active,
+.categories .tab-content ul li button:focus,
+.categories .tab-content ul li button-exact-active,
+.categories .tab-content ul li .nuxt-link:hover,
+.categories .tab-content ul li .nuxt-link.active,
+.categories .tab-content ul li .nuxt-link:active,
+.categories .tab-content ul li .nuxt-link:focus,
+.categories .tab-content ul li .nuxt-link-exact-active {
+  text-decoration: underline;
+  background-color: transparent;
+  color: #191919;
+}
+
+.categories .tab-content ul li a:hover:hover, .categories .tab-content ul li a.active:hover, .categories .tab-content ul li a:active:hover, .categories .tab-content ul li a:focus:hover, .categories .tab-content ul li a-exact-active:hover,
+.categories .tab-content ul li button:hover:hover,
+.categories .tab-content ul li button.active:hover,
+.categories .tab-content ul li button:active:hover,
+.categories .tab-content ul li button:focus:hover,
+.categories .tab-content ul li button-exact-active:hover,
+.categories .tab-content ul li .nuxt-link:hover:hover,
+.categories .tab-content ul li .nuxt-link.active:hover,
+.categories .tab-content ul li .nuxt-link:active:hover,
+.categories .tab-content ul li .nuxt-link:focus:hover,
+.categories .tab-content ul li .nuxt-link-exact-active:hover {
+  text-decoration: underline;
+  background-color: transparent;
+  color: #191919;
+}
+
+.btn-secondary:focus, .btn-secondary.active, .btn-secondary:active {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 @media (max-width: 575.98px) {
@@ -797,5 +1001,138 @@ header .toggle-side-bar {
 .error-page .nuxt-link {
   font-size: 18px;
   color: #33b5e5;
+}
+
+footer .menu-footer {
+  background-color: #E8E8E8;
+  padding: 50px 0;
+}
+
+footer .menu-footer .row {
+  row-gap: 28px;
+}
+
+footer .menu-footer .logo-footer {
+  width: 170px;
+}
+
+footer .menu-footer .address {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+footer .menu-footer address {
+  margin-top: 28px;
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  color: #191919;
+  letter-spacing: 0.05em;
+  line-height: 1.57142857;
+}
+
+footer .menu-footer .tit {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+footer .menu-footer .links li {
+  margin-bottom: 7px;
+}
+
+footer .menu-footer .links li:last-child {
+  margin-bottom: 0;
+}
+
+footer .menu-footer .links li a,
+footer .menu-footer .links li .nuxt-link {
+  color: #191919;
+  line-height: 1.6875;
+}
+
+footer .menu-footer .links li a:hover, footer .menu-footer .links li a-exact-active,
+footer .menu-footer .links li .nuxt-link:hover,
+footer .menu-footer .links li .nuxt-link-exact-active {
+  text-decoration: underline;
+}
+
+footer .menu-footer .payment-methods {
+  -webkit-column-count: 4;
+          column-count: 4;
+}
+
+footer .menu-footer .payment-methods li {
+  display: inline-block;
+}
+
+footer .menu-footer .payment-methods li img {
+  display: block;
+}
+
+footer .menu-footer .social li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+footer .menu-footer .social li:last-child {
+  margin-right: 0;
+}
+
+footer .menu-footer .social li a {
+  display: inline-block;
+  color: #191919;
+  font-size: 26px;
+  opacity: 0.8;
+}
+
+footer .menu-footer .social li a svg {
+  display: inline-block;
+}
+
+footer .menu-footer .social li a:hover {
+  opacity: 1;
+}
+
+footer .k13 {
+  display: block;
+  background-color: #191919;
+  color: white;
+  letter-spacing: 0.05em;
+  padding: 13px 0;
+}
+
+footer .k13 img {
+  display: inline-block;
+}
+
+footer .k13 a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 991.98px) {
+  footer .menu-footer address {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  footer .menu-footer .address {
+    -webkit-box-ordinal-group: 5;
+        -ms-flex-order: 4;
+            order: 4;
+  }
+  footer .menu-footer address {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  footer .k13 {
+    font-size: 15px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

@@ -2,7 +2,29 @@
 @import "variables";
 @import "fonts";
 @import "medias";
+@import "animations";
 @import "reset";
+
+main {
+    height: 100%;
+}
+
+//--Wrapper--------------------------------------//
+
+#wrapper {
+    overflow: hidden;
+}
+
+//------------------------------------------------------------------PAGE TRANSITON------------------------------------------------------------//
+
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.2s ease;
+}
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+}
 //-------------------------------------------------------------------SIDE BAR MENU--------------------------------------------------------------//
 .overlay {
     position: absolute;
@@ -15,21 +37,27 @@
 
     pointer-events: none;
     display: none;
-}
-@include media-only(xs) {
-    .overlay {
-        &.active {
-            display: block;
-            pointer-events: stroke;
-        }
+    &.active {
+        display: block;
+        pointer-events: stroke;
+        @include prefix(animation, fade-in .5s, webkit ms moz o);    
     }
 }
+// @include media-only(xs) {
+//     .overlay {
+//         &.active {
+//             display: block;
+//             pointer-events: stroke;
+//         }
+//     }
+// }
 
 //------------------------------------------------------------------HEADER------------------------------------------------------------------------//
 
 header {
     background-color: white;
     position: relative;
+    z-index: 999999;
     .navbar {
         padding: 15px 0;
     }
@@ -105,9 +133,9 @@ header {
                 margin-right: 0;
             }
             &:hover,
-            &-active {
-                svg{
-                    opacity: .7;
+            &-exact-active {
+                svg {
+                    opacity: 0.7;
                 }
             }
             &.user {
@@ -173,14 +201,16 @@ header {
 
 //-------------------------------------------------------------------CATEGORIES-------------------------------------------------------------//
 .categories {
-    background-color:white;
+    background-color: white;
     box-shadow: 0 3px 6px rgba(black, 0.16);
-    ul {
+    position: relative;
+    z-index: 9999;
+    .categories-list {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        position: relative;
         li {
-
             &.categories-title {
                 color: $color-1;
                 font-size: 20px;
@@ -198,21 +228,26 @@ header {
             a,
             button,
             .nuxt-link {
+                border: 0;
                 color: $color-1;
                 font-weight: bold;
                 display: inline-block;
                 padding: 10px 15px;
                 font-size: 17px;
+                background-color: transparent;
                 border-radius: 5px 5px 0 0;
-                svg{
+                line-height: initial;
+                svg {
                     font-size: 18px;
-                    margin-right: 8px ;
+                    margin-right: 8px;
                 }
                 &:hover {
                     background-color: darken($color: $color-1, $amount: 10%);
                     color: white;
                 }
-                &-active {
+
+                &:active,
+                &-exact-active {
                     background-color: $color-1;
                     color: white;
 
@@ -223,6 +258,117 @@ header {
                 }
             }
         }
+    }
+
+    .categories-menu {
+        padding: 22px 0;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        background-color: white;
+        z-index: 9999;
+        display: none;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+        &.active {
+            display: flex;
+            @include prefix(animation, fade-in .5s, webkit ms moz o);    
+        }
+    }
+    .menu-content {
+        width: 290px;
+        display: block;
+        margin: 0;
+        padding: 0 22px;
+        position: relative;
+
+        .categorie-item {
+            a,
+            button {
+                font-size: initial;
+                font-weight: normal;
+                line-height: initial;
+                padding: 0;
+                border-radius: 0;
+                border: none;
+                color: #2c2c2c;
+                display: block;
+                padding: 8px 10px 8px 33px;
+                background-color: transparent;
+                position: relative;
+                width: 100%;
+                text-align: left;
+                &.active{
+                    background-color: $color-1;
+                    color: white;
+                }
+                &::before {
+                    content: "\f054";
+                    position: absolute;
+                    left: 12px;
+                    top: 12px;
+                    font-family: $icon;
+                    font-weight: 900;
+                }
+            }
+        }
+    }
+    .tab-content {
+        position: relative;
+        z-index: 3;
+        > .active {
+            display: block;
+        }
+        .tab-pane {
+            height: 100%;
+        }
+        ul {
+            height: 100%;
+            column-count: 6;
+            column-gap: 70px;
+            column-fill: auto;
+            column-rule: 1px solid #2c2c2c;
+            li {
+                margin-bottom: 13px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                a,
+                button,
+                .nuxt-link {
+                    font-size: initial;
+                    font-weight: normal;
+                    line-height: initial;
+                    border: 0;
+                    border-radius: 0;
+                    padding: 0;
+                    &:hover,
+                    &.active,
+                    &:active,
+                    &:focus,
+                    &-exact-active {
+                        text-decoration: underline;
+                        background-color: transparent;
+                        color: $color-4;
+
+                        &:hover {
+                            text-decoration: underline;
+                            background-color: transparent;
+                            color: $color-4;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.btn-secondary {
+    &:focus,
+    &.active,
+    &:active {
+        box-shadow: none !important;
     }
 }
 
@@ -508,5 +654,130 @@ header {
     .nuxt-link {
         font-size: 18px;
         color: $info;
+    }
+}
+
+//---------------------------------------------------FOOTER------------------------------------------------------------------------------//
+footer {
+    .menu-footer {
+        background-color: $color-5;
+        padding: 50px 0;
+        .row {
+            row-gap: 28px;
+        }
+        .logo-footer {
+            width: 170px;
+        }
+        .address {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        address {
+            margin-top: 28px;
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            color: $color-4;
+            letter-spacing: 0.05em;
+            line-height: 1.57142857;
+        }
+        .tit {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+        .links {
+            li {
+                margin-bottom: 7px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                a,
+                .nuxt-link {
+                    color: $color-4;
+                    line-height: 1.6875;
+                    &:hover,
+                    &-exact-active {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+        .payment-methods {
+            column-count: 4;
+            li {
+                display: inline-block;
+                img {
+                    display: block;
+                }
+            }
+        }
+        .social {
+            li {
+                display: inline-block;
+                margin-right: 10px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                a {
+                    display: inline-block;
+                    color: $color-4;
+                    font-size: 26px;
+                    opacity: 0.8;
+                    svg {
+                        display: inline-block;
+                    }
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    .k13 {
+        display: block;
+        background-color: $color-4;
+        color: white;
+        letter-spacing: 0.05em;
+        padding: 13px 0;
+        img {
+            display: inline-block;
+        }
+        a {
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+}
+
+@include media-down(md) {
+    footer {
+        .menu-footer {
+            address {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+@include media-down(sm) {
+    footer {
+        .menu-footer {
+            .address {
+                order: 4;
+            }
+            address {
+                margin-top: 28px;
+            }
+        }
+    }
+}
+
+@include media-only(xs) {
+    footer {
+        .k13 {
+            font-size: 15px;
+        }
     }
 }
